@@ -8,8 +8,8 @@ The Object Security Option number was selected to 52225. It is placed as constan
 ## use oscoap-0.1.jar
 Currently the library is not available via repository. To use it, it must be included manually, as well the the following dependencies:
 
-group: 'com.augustcellars.cose', name: 'cose-java', version:'0.9.6'
-group: 'org.eclipse.californium', name: 'californium-core', version:'1.0.6'
+group: 'com.augustcellars.cose', name: 'cose-java', version:'0.9.6'  
+group: 'org.eclipse.californium', name: 'californium-core', version:'1.0.6'  
 group: 'org.eclipse.californium', name: 'element-connector', version:'1.0.6'
 
 Examplecode of how Server and Client can be used, is found in the source files OscoapTestClient and OscoapTestServer
