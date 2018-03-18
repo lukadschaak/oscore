@@ -1,0 +1,51 @@
+group 'de.uni-bremen.agrn'
+version '0.1'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.augustcellars.cose', name: 'cose-java', version:'0.9.6'
+    compile group: 'org.eclipse.californium', name: 'californium-core', version:'1.0.6'
+    compile group: 'org.eclipse.californium', name: 'element-connector', version:'1.0.6'
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'OSCOAP for Californium',
+                'Implementation-Version': version
+    }
+}
+
+task fatJarTestClient(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'OSCOAP Californium Test Client',
+                'Implementation-Version': version,
+                'Main-Class': 'OscoapTestClient'
+    }
+    baseName = project.name + '-test-client_standalone'
+    from { configurations.testCompile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from sourceSets.test.output
+    with jar
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+}
+
+task fatJarTestServer(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'OSCOAP Californium Test Server',
+                'Implementation-Version': version,
+                'Main-Class': 'OscoapTestServer'
+    }
+    baseName = project.name + '-test-server_standalone'
+    from { configurations.testCompile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from sourceSets.test.output
+    with jar
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+}
